@@ -37,12 +37,7 @@ function renderBlock(block: ContentBlock) {
       return (
         <figure key={block.id} className="relative w-full aspect-video">
           {media?.url && (
-            <Image
-              src={media.url}
-              alt={media.alt || ''}
-              fill
-              className="object-cover"
-            />
+            <Image src={media.url} alt={media.alt || ''} fill className="object-cover" />
           )}
         </figure>
       )

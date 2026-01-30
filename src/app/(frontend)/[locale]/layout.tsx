@@ -26,36 +26,36 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale}>
-    <body>
-    <NextIntlClientProvider messages={messages}>
-      <header>
-        <nav>
-          <ul>
-            {navigation.items?.map((item, i) => (
-              <li key={i}>
-                <a href={item.href}>{item.label}</a>
-              </li>
+      <body>
+        <NextIntlClientProvider messages={messages}>
+          <header>
+            <nav>
+              <ul>
+                {navigation.items?.map((item, i) => (
+                  <li key={i}>
+                    <a href={item.href}>{item.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </header>
+          <main>{children}</main>
+          <footer>
+            {footer.columns?.map((column, i) => (
+              <div key={i}>
+                <h3>{column.title}</h3>
+                <ul>
+                  {column.links?.map((link, j) => (
+                    <li key={j}>
+                      <a href={link.href}>{link.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
-        </nav>
-      </header>
-      <main>{children}</main>
-      <footer>
-        {footer.columns?.map((column, i) => (
-          <div key={i}>
-            <h3>{column.title}</h3>
-            <ul>
-              {column.links?.map((link, j) => (
-                <li key={j}>
-                  <a href={link.href}>{link.label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </footer>
-    </NextIntlClientProvider>
-    </body>
+          </footer>
+        </NextIntlClientProvider>
+      </body>
     </html>
   )
 }

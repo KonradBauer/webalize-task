@@ -41,9 +41,7 @@ export default async function NewsPage({ params, searchParams }: Props) {
           </li>
           {categories.map((cat) => (
             <li key={cat}>
-              <Link href={`/news?category=${cat}`}>
-                {t(`categories.${cat}`)}
-              </Link>
+              <Link href={`/news?category=${cat}`}>{t(`categories.${cat}`)}</Link>
             </li>
           ))}
         </ul>

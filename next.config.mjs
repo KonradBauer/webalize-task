@@ -3,6 +3,8 @@ import createNextIntlPlugin from 'next-intl/plugin'
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
 
-const nextConfig = { /* webpack config */ }
+const nextConfig = {
+  /* webpack config */
+}
 
 export default withPayload(withNextIntl(nextConfig), { devBundleServerPackages: false })
