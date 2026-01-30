@@ -1,0 +1,5 @@
+export { getNewsList, getNewsPost, getNewsCategories } from './news'
+export { getFaqItems } from './faq'
+export { getIntegrations } from './integrations'
+export { getNavigation, getFooter, getContactModal } from './globals'
+export { getLayoutData } from './layout'
