@@ -15,13 +15,19 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "test": "pnpm run test:int && pnpm run test:e2e",
     "test:e2e": "cross-env NODE_OPTIONS=\"--no-deprecation --no-experimental-strip-types\" pnpm exec playwright test",
-    "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts"
+    "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts",
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@payloadcms/db-mongodb": "3.73.0",
     "@payloadcms/next": "3.73.0",
     "@payloadcms/richtext-lexical": "3.73.0",
     "@payloadcms/ui": "3.73.0",
+    "@radix-ui/react-accordion": "^1.2.12",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@tanstack/react-query": "^5.90.20",
+    "axios": "^1.13.4",
+    "clsx": "^2.1.1",
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
     "graphql": "^16.8.1",
@@ -30,21 +36,28 @@
     "payload": "3.73.0",
     "react": "19.2.1",
     "react-dom": "19.2.1",
-    "sharp": "0.34.2"
+    "react-hook-form": "^7.71.1",
+    "sharp": "0.34.2",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@playwright/test": "1.56.1",
+    "@tanstack/react-query-devtools": "^5.91.3",
     "@testing-library/react": "16.3.0",
     "@types/node": "^22.5.4",
     "@types/react": "19.2.9",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "4.5.2",
+    "autoprefixer": "^10.4.23",
     "eslint": "^9.16.0",
     "eslint-config-next": "15.4.11",
     "jsdom": "26.1.0",
+    "lint-staged": "^16.2.7",
     "playwright": "1.56.1",
     "playwright-core": "1.56.1",
+    "postcss": "^8.5.6",
     "prettier": "^3.4.2",
+    "tailwindcss": "^4.1.18",
     "typescript": "5.7.3",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "3.2.3"
@@ -60,5 +73,14 @@
       "unrs-resolver"
     ]
   },
-  "packageManager": "pnpm@10.28.2+sha512.41872f037ad22f7348e3b1debbaf7e867cfd448f2726d9cf74c08f19507c31d2c8e7a11525b983febc2df640b5438dee6023ebb1f84ed43cc2d654d2bc326264"
+  "packageManager": "pnpm@10.28.2+sha512.41872f037ad22f7348e3b1debbaf7e867cfd448f2726d9cf74c08f19507c31d2c8e7a11525b983febc2df640b5438dee6023ebb1f84ed43cc2d654d2bc326264",
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
+    ]
+  }
 }

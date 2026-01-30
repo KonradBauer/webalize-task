@@ -1,67 +1,131 @@
-# Payload Blank Template
+# Webalize Task
 
-This template comes configured with the bare minimum to get started on anything you need.
+Full-stack CMS-powered website built with Payload CMS, Next.js 15 and React 19. Supports Polish and English localization, content management via an admin panel, and a configurable contact form.
 
-## Quick start
+## Quick Start
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+1. Clone the repository
+2. `cp .env.example .env` and fill in `DATABASE_URL` (MongoDB) and `PAYLOAD_SECRET`
+3. `pnpm install && pnpm dev`
+4. Open `http://localhost:3000` (frontend) or `http://localhost:3000/admin` (admin panel)
+5. Follow on-screen instructions to create the first admin user
 
-## Quick Start - local setup
+### Docker (Optional)
 
-To spin up this template locally, follow these steps:
+- Set `MONGODB_URL` in `.env` to `mongodb://127.0.0.1/<dbname>`
+- Match it in `docker-compose.yml`
+- Run `docker-compose up`
 
-### Clone
+## Architecture
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+### Tech Stack
 
-### Development
+| Layer | Technology |
+|-------|------------|
+| Framework | Next.js 15.4 |
+| UI | React 19, Tailwind CSS 4, Radix UI |
+| CMS | Payload 3.73 (headless, admin panel at `/admin`) |
+| Database | MongoDB (`@payloadcms/db-mongodb`) |
+| i18n | next-intl (Polish default, English) |
+| Forms | react-hook-form + Zod validation |
+| Data fetching | @tanstack/react-query, Axios |
+| Testing | Vitest (unit), Playwright (E2E) |
 
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+### Project Structure
 
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+```
+src/
+├── app/
+│   ├── (frontend)/[locale]/     # Public routes (locale-based)
+│   │   ├── page.tsx             # Home
+│   │   ├── not-found.tsx        # 404
+│   │   ├── news/                # News list + detail ([slug])
+│   │   ├── faq/                 # FAQ list
+│   │   └── integrations/        # Integrations list
+│   └── (payload)/               # Admin panel + API routes
+├── collections/                 # Payload CMS collections
+├── globals/                     # Payload globals (Navigation, Footer, ContactModal)
+├── blocks/                      # Content blocks (Paragraph, Heading, Image, Code)
+├── lib/
+│   ├── api/                     # Data fetching utilities
+│   └── actions/                 # Server actions (contact form)
+├── i18n/                        # Internationalization config
+└── payload.config.ts            # Payload CMS configuration
+messages/
+├── en.json                      # English translations
+└── pl.json                      # Polish translations
+```
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+## Collections
 
-#### Docker (Optional)
+| Collection | Purpose |
+|------------|---------|
+| **Users** | Admin authentication |
+| **Media** | File/image uploads with Sharp processing |
+| **News** | Localized news posts with content blocks, categories (Engineering, Product, Company), and related posts |
+| **Faq** | Localized FAQ entries grouped by category |
+| **Integrations** | Third-party integrations with status (Available / Coming Soon), categories, and docs links |
+| **ContactSubmissions** | Contact form submissions (email, JSON form data, locale) |
 
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
+## Globals
 
-To do so, follow these steps:
+| Global | Purpose |
+|--------|---------|
+| **Navigation** | Configurable menu items (label + URL) |
+| **Footer** | Footer columns with links |
+| **ContactModal** | Dynamic contact form config: field definitions (text, email, textarea, select), buttons, and success messages |
 
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
+## Localization
 
-## How it works
+- **Locales**: Polish (default), English
+- **Routing**: Locale prefix `as-needed` (no `/pl` prefix for default locale)
+- **Coverage**: CMS content (collections/globals) + UI translations (`messages/*.json`)
 
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
+## Scripts
 
-### Collections
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start development server |
+| `pnpm build` | Production build |
+| `pnpm start` | Start production server |
+| `pnpm lint` | Run ESLint |
+| `pnpm test` | Run all tests (unit + E2E) |
+| `pnpm test:int` | Run unit tests (Vitest) |
+| `pnpm test:e2e` | Run E2E tests (Playwright) |
+| `pnpm generate:types` | Generate Payload TypeScript types |
+| `pnpm generate:importmap` | Generate Payload import map |
 
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
+## Tools and Dependencies
 
-- #### Users (Authentication)
+| Category | Package | Purpose | Dev / Prod |
+|----------|---------|---------|------------|
+| **Payload / CMS** | `payload` | Headless CMS backend | Prod |
+|  | `@payloadcms/db-mongodb` | MongoDB adapter for Payload | Prod |
+|  | `@payloadcms/next` | Next.js integration for Payload | Prod |
+|  | `@payloadcms/richtext-lexical` | Rich text editor for Payload | Prod |
+|  | `@payloadcms/ui` | UI components for Payload | Prod |
+| **Frontend / React** | `react` / `react-dom` | Core React libraries | Prod |
+|  | `next` | Framework for SSR and static sites | Prod |
+|  | `next-intl` | Internationalization support | Prod |
+|  | `@tanstack/react-query` | Data fetching & caching | Prod |
+|  | `@tanstack/react-query-devtools` | Devtools for React Query | Dev |
+|  | `react-hook-form` | Forms management in React | Prod |
+|  | `@hookform/resolvers` | Schema validation for forms | Prod |
+|  | `clsx` | Conditional classNames utility | Prod |
+|  | `@radix-ui/react-accordion` / `@radix-ui/react-dialog` | Accessible UI primitives | Prod |
+| **Linting / Formatting / Dev Tools** | `eslint` / `eslint-config-next` | Linting and code quality | Dev |
+|  | `prettier` | Code formatting | Dev |
+|  | `lint-staged` | Linting and formatting on staged files | Dev |
+|  | `typescript` | Type safety and modern JS features | Dev |
+|  | `vitest` | Unit testing framework | Dev |
+|  | `@testing-library/react` | React testing utilities | Dev |
+| **Testing / E2E** | `playwright` / `@playwright/test` | End-to-end testing | Dev |
+| **Build / Styling** | `tailwindcss` | Utility-first CSS framework | Prod |
+|  | `postcss` / `autoprefixer` | CSS tooling | Dev |
+|  | `vite-tsconfig-paths` / `@vitejs/plugin-react` | Vite tooling for fast dev builds | Dev |
+| **Other Utilities** | `axios` | HTTP client | Prod |
+|  | `dotenv` | Load environment variables | Dev |
+|  | `graphql` | GraphQL support | Prod |
+|  | `sharp` | Image processing | Prod |
+|  | `zod` | Schema validation | Prod |
 
-  Users are auth-enabled collections that have access to the admin panel.
-
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/main/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
-
-- #### Media
-
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
-
-### Docker
-
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
-
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
-
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
-
-## Questions
-
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
