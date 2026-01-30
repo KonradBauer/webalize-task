@@ -7,10 +7,10 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
-import { Integrations } from '@/collections/Integrations'
-import { Faq } from '@/collections/Faq'
-import { News } from '@/collections/News'
-import { ContactModal, Footer, Navigation } from '@/globals'
+import { News } from './collections/News'
+import { Faq } from './collections/Faq'
+import { Integrations } from './collections/Integrations'
+import { Navigation, Footer, ContactModal } from './globals'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -22,14 +22,6 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  localization: {
-    locales: [
-      { label: 'Polski', code: 'pl' },
-      { label: 'English', code: 'en' },
-    ],
-    defaultLocale: 'pl',
-    fallback: true,
-  },
   collections: [Users, Media, News, Faq, Integrations],
   globals: [Navigation, Footer, ContactModal],
   editor: lexicalEditor(),
@@ -40,6 +32,14 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URL || '',
   }),
+  localization: {
+    locales: [
+      { label: 'Polski', code: 'pl' },
+      { label: 'English', code: 'en' },
+    ],
+    defaultLocale: 'pl',
+    fallback: true,
+  },
   sharp,
   plugins: [],
 })
