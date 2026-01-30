@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getNewsList, getNewsCategories } from '@/lib/api'
-import { Link } from '@/i180n/navigation'
+import { Link } from '@/i18n/navigation'
 
 type Props = {
   params: Promise<{ locale: string }>

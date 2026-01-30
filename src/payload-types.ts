@@ -59,504 +59,502 @@ export type SupportedTimezones =
   | 'Pacific/Guam'
   | 'Pacific/Noumea'
   | 'Pacific/Auckland'
-  | 'Pacific/Fiji'
+  | 'Pacific/Fiji';
 
 export interface Config {
   auth: {
-    users: UserAuthOperations
-  }
-  blocks: {}
+    users: UserAuthOperations;
+  };
+  blocks: {};
   collections: {
-    users: User
-    media: Media
-    news: News
-    faq: Faq
-    integrations: Integration
-    'payload-kv': PayloadKv
-    'payload-locked-documents': PayloadLockedDocument
-    'payload-preferences': PayloadPreference
-    'payload-migrations': PayloadMigration
-  }
-  collectionsJoins: {}
+    users: User;
+    media: Media;
+    news: News;
+    faq: Faq;
+    integrations: Integration;
+    'payload-kv': PayloadKv;
+    'payload-locked-documents': PayloadLockedDocument;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
+  };
+  collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>
-    media: MediaSelect<false> | MediaSelect<true>
-    news: NewsSelect<false> | NewsSelect<true>
-    faq: FaqSelect<false> | FaqSelect<true>
-    integrations: IntegrationsSelect<false> | IntegrationsSelect<true>
-    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>
-    'payload-locked-documents':
-      | PayloadLockedDocumentsSelect<false>
-      | PayloadLockedDocumentsSelect<true>
-    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>
-    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>
-  }
+    users: UsersSelect<false> | UsersSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
+    faq: FaqSelect<false> | FaqSelect<true>;
+    integrations: IntegrationsSelect<false> | IntegrationsSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+  };
   db: {
-    defaultIDType: string
-  }
-  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('pl' | 'en') | ('pl' | 'en')[]
+    defaultIDType: string;
+  };
+  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('pl' | 'en') | ('pl' | 'en')[];
   globals: {
-    navigation: Navigation
-    footer: Footer
-    'contact-modal': ContactModal
-  }
+    navigation: Navigation;
+    footer: Footer;
+    'contact-modal': ContactModal;
+  };
   globalsSelect: {
-    navigation: NavigationSelect<false> | NavigationSelect<true>
-    footer: FooterSelect<false> | FooterSelect<true>
-    'contact-modal': ContactModalSelect<false> | ContactModalSelect<true>
-  }
-  locale: 'pl' | 'en'
+    navigation: NavigationSelect<false> | NavigationSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+    'contact-modal': ContactModalSelect<false> | ContactModalSelect<true>;
+  };
+  locale: 'pl' | 'en';
   user: User & {
-    collection: 'users'
-  }
+    collection: 'users';
+  };
   jobs: {
-    tasks: unknown
-    workflows: unknown
-  }
+    tasks: unknown;
+    workflows: unknown;
+  };
 }
 export interface UserAuthOperations {
   forgotPassword: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   login: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   registerFirstUser: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   unlock: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
-  id: string
-  updatedAt: string
-  createdAt: string
-  email: string
-  resetPasswordToken?: string | null
-  resetPasswordExpiration?: string | null
-  salt?: string | null
-  hash?: string | null
-  loginAttempts?: number | null
-  lockUntil?: string | null
+  id: string;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
   sessions?:
     | {
-        id: string
-        createdAt?: string | null
-        expiresAt: string
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
       }[]
-    | null
-  password?: string | null
+    | null;
+  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
-  id: string
-  alt: string
-  updatedAt: string
-  createdAt: string
-  url?: string | null
-  thumbnailURL?: string | null
-  filename?: string | null
-  mimeType?: string | null
-  filesize?: number | null
-  width?: number | null
-  height?: number | null
-  focalX?: number | null
-  focalY?: number | null
+  id: string;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "news".
  */
 export interface News {
-  id: string
-  title: string
-  slug: string
-  excerpt: string
-  date: string
-  category: 'engineering' | 'product' | 'company'
-  heroImage: string | Media
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  date: string;
+  category: 'engineering' | 'product' | 'company';
+  heroImage: string | Media;
   contentBlocks?:
     | (
         | {
-            text: string
-            id?: string | null
-            blockName?: string | null
-            blockType: 'paragraph'
+            text: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'paragraph';
           }
         | {
-            level: '2' | '3'
-            text: string
-            id?: string | null
-            blockName?: string | null
-            blockType: 'heading'
+            level: '2' | '3';
+            text: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'heading';
           }
         | {
-            image: string | Media
-            id?: string | null
-            blockName?: string | null
-            blockType: 'image'
+            image: string | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'image';
           }
         | {
-            language?: string | null
-            code: string
-            id?: string | null
-            blockName?: string | null
-            blockType: 'code'
+            language?: string | null;
+            code: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'code';
           }
       )[]
-    | null
-  relatedPosts?: (string | News)[] | null
-  updatedAt: string
-  createdAt: string
+    | null;
+  relatedPosts?: (string | News)[] | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "faq".
  */
 export interface Faq {
-  id: string
-  question: string
-  answer: string
-  category?: string | null
-  updatedAt: string
-  createdAt: string
+  id: string;
+  question: string;
+  answer: string;
+  category?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "integrations".
  */
 export interface Integration {
-  id: string
-  name: string
-  logo: string | Media
-  shortDescription: string
-  category: 'analytics' | 'marketing' | 'sales' | 'support' | 'development'
-  status: 'available' | 'coming_soon'
-  docsUrl?: string | null
-  updatedAt: string
-  createdAt: string
+  id: string;
+  name: string;
+  logo: string | Media;
+  shortDescription: string;
+  category: 'analytics' | 'marketing' | 'sales' | 'support' | 'development';
+  status: 'available' | 'coming_soon';
+  docsUrl?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: string
-  key: string
+  id: string;
+  key: string;
   data:
     | {
-        [k: string]: unknown
+        [k: string]: unknown;
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null
+    | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string
+  id: string;
   document?:
     | ({
-        relationTo: 'users'
-        value: string | User
+        relationTo: 'users';
+        value: string | User;
       } | null)
     | ({
-        relationTo: 'media'
-        value: string | Media
+        relationTo: 'media';
+        value: string | Media;
       } | null)
     | ({
-        relationTo: 'news'
-        value: string | News
+        relationTo: 'news';
+        value: string | News;
       } | null)
     | ({
-        relationTo: 'faq'
-        value: string | Faq
+        relationTo: 'faq';
+        value: string | Faq;
       } | null)
     | ({
-        relationTo: 'integrations'
-        value: string | Integration
-      } | null)
-  globalSlug?: string | null
+        relationTo: 'integrations';
+        value: string | Integration;
+      } | null);
+  globalSlug?: string | null;
   user: {
-    relationTo: 'users'
-    value: string | User
-  }
-  updatedAt: string
-  createdAt: string
+    relationTo: 'users';
+    value: string | User;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string
+  id: string;
   user: {
-    relationTo: 'users'
-    value: string | User
-  }
-  key?: string | null
+    relationTo: 'users';
+    value: string | User;
+  };
+  key?: string | null;
   value?:
     | {
-        [k: string]: unknown
+        [k: string]: unknown;
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null
-  updatedAt: string
-  createdAt: string
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string
-  name?: string | null
-  batch?: number | null
-  updatedAt: string
-  createdAt: string
+  id: string;
+  name?: string | null;
+  batch?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  updatedAt?: T
-  createdAt?: T
-  email?: T
-  resetPasswordToken?: T
-  resetPasswordExpiration?: T
-  salt?: T
-  hash?: T
-  loginAttempts?: T
-  lockUntil?: T
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
   sessions?:
     | T
     | {
-        id?: T
-        createdAt?: T
-        expiresAt?: T
-      }
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  alt?: T
-  updatedAt?: T
-  createdAt?: T
-  url?: T
-  thumbnailURL?: T
-  filename?: T
-  mimeType?: T
-  filesize?: T
-  width?: T
-  height?: T
-  focalX?: T
-  focalY?: T
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "news_select".
  */
 export interface NewsSelect<T extends boolean = true> {
-  title?: T
-  slug?: T
-  excerpt?: T
-  date?: T
-  category?: T
-  heroImage?: T
+  title?: T;
+  slug?: T;
+  excerpt?: T;
+  date?: T;
+  category?: T;
+  heroImage?: T;
   contentBlocks?:
     | T
     | {
         paragraph?:
           | T
           | {
-              text?: T
-              id?: T
-              blockName?: T
-            }
+              text?: T;
+              id?: T;
+              blockName?: T;
+            };
         heading?:
           | T
           | {
-              level?: T
-              text?: T
-              id?: T
-              blockName?: T
-            }
+              level?: T;
+              text?: T;
+              id?: T;
+              blockName?: T;
+            };
         image?:
           | T
           | {
-              image?: T
-              id?: T
-              blockName?: T
-            }
+              image?: T;
+              id?: T;
+              blockName?: T;
+            };
         code?:
           | T
           | {
-              language?: T
-              code?: T
-              id?: T
-              blockName?: T
-            }
-      }
-  relatedPosts?: T
-  updatedAt?: T
-  createdAt?: T
+              language?: T;
+              code?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  relatedPosts?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "faq_select".
  */
 export interface FaqSelect<T extends boolean = true> {
-  question?: T
-  answer?: T
-  category?: T
-  updatedAt?: T
-  createdAt?: T
+  question?: T;
+  answer?: T;
+  category?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "integrations_select".
  */
 export interface IntegrationsSelect<T extends boolean = true> {
-  name?: T
-  logo?: T
-  shortDescription?: T
-  category?: T
-  status?: T
-  docsUrl?: T
-  updatedAt?: T
-  createdAt?: T
+  name?: T;
+  logo?: T;
+  shortDescription?: T;
+  category?: T;
+  status?: T;
+  docsUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
-  key?: T
-  data?: T
+  key?: T;
+  data?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
-  document?: T
-  globalSlug?: T
-  user?: T
-  updatedAt?: T
-  createdAt?: T
+  document?: T;
+  globalSlug?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences_select".
  */
 export interface PayloadPreferencesSelect<T extends boolean = true> {
-  user?: T
-  key?: T
-  value?: T
-  updatedAt?: T
-  createdAt?: T
+  user?: T;
+  key?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations_select".
  */
 export interface PayloadMigrationsSelect<T extends boolean = true> {
-  name?: T
-  batch?: T
-  updatedAt?: T
-  createdAt?: T
+  name?: T;
+  batch?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navigation".
  */
 export interface Navigation {
-  id: string
+  id: string;
   items?:
     | {
-        label: string
-        href: string
-        id?: string | null
+        label: string;
+        href: string;
+        id?: string | null;
       }[]
-    | null
-  updatedAt?: string | null
-  createdAt?: string | null
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer".
  */
 export interface Footer {
-  id: string
+  id: string;
   columns?:
     | {
-        title: string
+        title: string;
         links?:
           | {
-              label: string
-              href: string
-              id?: string | null
+              label: string;
+              href: string;
+              id?: string | null;
             }[]
-          | null
-        id?: string | null
+          | null;
+        id?: string | null;
       }[]
-    | null
-  updatedAt?: string | null
-  createdAt?: string | null
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact-modal".
  */
 export interface ContactModal {
-  id: string
-  title: string
-  description?: string | null
+  id: string;
+  title: string;
+  description?: string | null;
   fields?:
     | {
-        label: string
-        name: string
-        type: 'text' | 'email' | 'textarea' | 'select'
-        required?: boolean | null
-        placeholder?: string | null
-        id?: string | null
+        label: string;
+        name: string;
+        type: 'text' | 'email' | 'textarea' | 'select';
+        required?: boolean | null;
+        placeholder?: string | null;
+        id?: string | null;
       }[]
-    | null
+    | null;
   primaryButton: {
-    label: string
-    href?: string | null
-    variant?: ('primary' | 'secondary' | 'ghost') | null
-  }
+    label: string;
+    href?: string | null;
+    variant?: ('primary' | 'secondary' | 'ghost') | null;
+  };
   secondaryButton?: {
-    label?: string | null
-    href?: string | null
-    variant?: ('primary' | 'secondary' | 'ghost') | null
-  }
-  successMessage: string
-  updatedAt?: string | null
-  createdAt?: string | null
+    label?: string | null;
+    href?: string | null;
+    variant?: ('primary' | 'secondary' | 'ghost') | null;
+  };
+  successMessage: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -566,13 +564,13 @@ export interface NavigationSelect<T extends boolean = true> {
   items?:
     | T
     | {
-        label?: T
-        href?: T
-        id?: T
-      }
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -582,63 +580,64 @@ export interface FooterSelect<T extends boolean = true> {
   columns?:
     | T
     | {
-        title?: T
+        title?: T;
         links?:
           | T
           | {
-              label?: T
-              href?: T
-              id?: T
-            }
-        id?: T
-      }
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact-modal_select".
  */
 export interface ContactModalSelect<T extends boolean = true> {
-  title?: T
-  description?: T
+  title?: T;
+  description?: T;
   fields?:
     | T
     | {
-        label?: T
-        name?: T
-        type?: T
-        required?: T
-        placeholder?: T
-        id?: T
-      }
+        label?: T;
+        name?: T;
+        type?: T;
+        required?: T;
+        placeholder?: T;
+        id?: T;
+      };
   primaryButton?:
     | T
     | {
-        label?: T
-        href?: T
-        variant?: T
-      }
+        label?: T;
+        href?: T;
+        variant?: T;
+      };
   secondaryButton?:
     | T
     | {
-        label?: T
-        href?: T
-        variant?: T
-      }
-  successMessage?: T
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+        label?: T;
+        href?: T;
+        variant?: T;
+      };
+  successMessage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
-  [k: string]: unknown
+  [k: string]: unknown;
 }
+
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}

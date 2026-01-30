@@ -2,7 +2,7 @@ import React from 'react'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { routing } from '@/i180n/routing'
+import { routing } from '@/i18n/routing'
 import { getLayoutData } from '@/lib/api'
 
 type Props = {

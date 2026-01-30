@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
 import { getIntegrations } from '@/lib/api'
-import { Link } from '@/i180n/navigation'
+import { Link } from '@/i18n/navigation'
 import type { Media as MediaType } from '@/payload-types'
 
 type Props = {
