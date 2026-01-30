@@ -3,13 +3,13 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getFaqItems } from '@/lib/api'
 
 type Props = {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }
 
 export async function generateMetadata(
   { params }: Props
 ): Promise<Metadata> {
-  const { locale } = params
+  const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'metadata.faq' })
 
   return {
@@ -19,7 +19,7 @@ export async function generateMetadata(
 }
 
 export default async function FaqPage({ params }: Props) {
-  const { locale } = params
+  const { locale } = await params
   setRequestLocale(locale)
 
   const faqResult = await getFaqItems(locale)

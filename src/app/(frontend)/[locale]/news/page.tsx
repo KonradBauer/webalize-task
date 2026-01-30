@@ -5,12 +5,12 @@ import { Link } from '@/i18n/navigation'
 import type { Locale } from '@/lib/api/news'
 
 type Props = {
-  params: { locale: Locale }
-  searchParams: { category?: string }
+  params: Promise<{ locale: Locale }>
+  searchParams: Promise<{ category?: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = params
+  const { locale } = await params
 
   const t = await getTranslations({
     locale,
@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function NewsPage({ params, searchParams }: Props) {
-  const { locale } = params
-  const { category } = searchParams
+  const { locale } = await params
+  const { category } = await searchParams
 
   setRequestLocale(locale)
 
