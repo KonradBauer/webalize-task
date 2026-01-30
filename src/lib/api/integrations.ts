@@ -1,16 +1,26 @@
 import { getPayloadClient } from '../payload'
+import type { PaginatedDocs } from 'payload'
+import type { Integration } from '@/payload-types'
 
-export async function getIntegrations(locale: string, category?: string) {
+export type Locale = 'pl' | 'en'
+
+export async function getIntegrations(
+  locale: Locale,
+  category?: string
+): Promise<PaginatedDocs<Integration>> {
   const payload = await getPayloadClient()
 
-  const where: Record<string, unknown> = {}
+  const where: {
+    category?: { equals: string }
+  } = {}
+
   if (category) {
     where.category = { equals: category }
   }
 
   return payload.find({
     collection: 'integrations',
-    locale: locale as 'pl' | 'en',
+    locale,
     sort: 'name',
     depth: 1,
     where,

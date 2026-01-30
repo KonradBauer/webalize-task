@@ -1,15 +1,22 @@
+import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getNewsList, getNewsCategories } from '@/lib/api'
 import { Link } from '@/i18n/navigation'
+import type { Locale } from '@/lib/api/news'
 
 type Props = {
-  params: Promise<{ locale: string }>
-  searchParams: Promise<{ category?: string }>
+  params: { locale: Locale }
+  searchParams: { category?: string }
 }
 
-export async function generateMetadata({ params }: Props) {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: 'metadata.news' })
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = params
+
+  const t = await getTranslations({
+    locale,
+    namespace: 'metadata.news',
+  })
+
   return {
     title: t('title'),
     description: t('description'),
@@ -17,10 +24,10 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function NewsPage({ params, searchParams }: Props) {
-  const { locale } = await params
-  setRequestLocale(locale)
+  const { locale } = params
+  const { category } = searchParams
 
-  const { category } = await searchParams
+  setRequestLocale(locale)
 
   const [newsResult, categories] = await Promise.all([
     getNewsList(locale, category),
@@ -39,9 +46,12 @@ export default async function NewsPage({ params, searchParams }: Props) {
           <li>
             <Link href="/news">{tCommon('allCategories')}</Link>
           </li>
+
           {categories.map((cat) => (
             <li key={cat}>
-              <Link href={`/news?category=${cat}`}>{t(`categories.${cat}`)}</Link>
+              <Link href={{ pathname: '/news', query: { category: cat } }}>
+                {t(`categories.${cat}`)}
+              </Link>
             </li>
           ))}
         </ul>

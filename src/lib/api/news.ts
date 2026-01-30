@@ -1,28 +1,41 @@
 import { getPayloadClient } from '../payload'
+import type { PaginatedDocs } from 'payload'
+import type { News } from '@/payload-types'
 
-export async function getNewsList(locale: string, category?: string) {
+export type Locale = 'pl' | 'en'
+
+export async function getNewsList(
+  locale: Locale,
+  category?: string
+): Promise<PaginatedDocs<News>> {
   const payload = await getPayloadClient()
 
-  const where: Record<string, unknown> = {}
+  const where: {
+    category?: { equals: string }
+  } = {}
+
   if (category) {
     where.category = { equals: category }
   }
 
   return payload.find({
     collection: 'news',
-    locale: locale as 'pl' | 'en',
+    locale,
     sort: '-date',
     depth: 1,
     where,
   })
 }
 
-export async function getNewsPost(slug: string, locale: string) {
+export async function getNewsPost(
+  slug: string,
+  locale: Locale
+): Promise<News | null> {
   const payload = await getPayloadClient()
 
-  const result = await payload.find({
+  const { docs } = await payload.find({
     collection: 'news',
-    locale: locale as 'pl' | 'en',
+    locale,
     where: {
       slug: { equals: slug },
     },
@@ -30,7 +43,7 @@ export async function getNewsPost(slug: string, locale: string) {
     limit: 1,
   })
 
-  return result.docs[0] ?? null
+  return docs[0] ?? null
 }
 
 export async function getNewsCategories() {

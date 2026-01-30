@@ -1,17 +1,19 @@
+import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
 import { getIntegrations } from '@/lib/api'
 import { Link } from '@/i18n/navigation'
 import type { Media as MediaType } from '@/payload-types'
+import type { Locale } from '@/lib/api/integrations'
 
 type Props = {
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: Locale }>
   searchParams: Promise<{ category?: string }>
 }
 
 const CATEGORIES = ['analytics', 'marketing', 'sales', 'support', 'development'] as const
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'metadata.integrations' })
   return {
