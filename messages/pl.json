@@ -50,5 +50,9 @@
       "development": "Programowanie"
     },
     "docs": "Dokumentacja"
+  },
+  "notFound": {
+    "message": "Strona nie zostala znaleziona",
+    "backHome": "Strona glowna"
   }
 }

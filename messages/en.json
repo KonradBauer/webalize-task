@@ -50,5 +50,9 @@
       "development": "Development"
     },
     "docs": "Documentation"
+  },
+  "notFound": {
+    "message": "Page not found",
+    "backHome": "Go to homepage"
   }
 }
