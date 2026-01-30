@@ -1,0 +1,54 @@
+{
+  "common": {
+    "home": "Home",
+    "readMore": "Read more",
+    "backToList": "Back to list",
+    "allCategories": "All categories",
+    "noResults": "No results"
+  },
+  "metadata": {
+    "home": {
+      "title": "Webalize",
+      "description": "Webalize - home page"
+    },
+    "news": {
+      "title": "News",
+      "description": "Latest posts and news"
+    },
+    "faq": {
+      "title": "FAQ",
+      "description": "Frequently asked questions"
+    },
+    "integrations": {
+      "title": "Integrations",
+      "description": "Available integrations"
+    }
+  },
+  "news": {
+    "title": "News",
+    "relatedPosts": "Related posts",
+    "categories": {
+      "engineering": "Engineering",
+      "product": "Product",
+      "company": "Company"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions"
+  },
+  "integrations": {
+    "title": "Integrations",
+    "status": {
+      "available": "Available",
+      "coming_soon": "Coming soon"
+    },
+    "categories": {
+      "analytics": "Analytics",
+      "marketing": "Marketing",
+      "sales": "Sales",
+      "support": "Support",
+      "development": "Development"
+    },
+    "docs": "Documentation"
+  }
+}

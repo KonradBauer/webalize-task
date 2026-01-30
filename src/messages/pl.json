@@ -1,0 +1,54 @@
+{
+  "common": {
+    "home": "Strona glowna",
+    "readMore": "Czytaj wiecej",
+    "backToList": "Powrot do listy",
+    "allCategories": "Wszystkie kategorie",
+    "noResults": "Brak wynikow"
+  },
+  "metadata": {
+    "home": {
+      "title": "Webalize",
+      "description": "Webalize - strona glowna"
+    },
+    "news": {
+      "title": "Aktualnosci",
+      "description": "Najnowsze wpisy i aktualnosci"
+    },
+    "faq": {
+      "title": "FAQ",
+      "description": "Czesto zadawane pytania"
+    },
+    "integrations": {
+      "title": "Integracje",
+      "description": "Dostepne integracje"
+    }
+  },
+  "news": {
+    "title": "Aktualnosci",
+    "relatedPosts": "Powiazane wpisy",
+    "categories": {
+      "engineering": "Inzynieria",
+      "product": "Produkt",
+      "company": "Firma"
+    }
+  },
+  "faq": {
+    "title": "Czesto zadawane pytania"
+  },
+  "integrations": {
+    "title": "Integracje",
+    "status": {
+      "available": "Dostepna",
+      "coming_soon": "Wkrotce"
+    },
+    "categories": {
+      "analytics": "Analityka",
+      "marketing": "Marketing",
+      "sales": "Sprzedaz",
+      "support": "Wsparcie",
+      "development": "Programowanie"
+    },
+    "docs": "Dokumentacja"
+  }
+}
