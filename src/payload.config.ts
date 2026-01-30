@@ -10,6 +10,7 @@ import { Media } from './collections/Media'
 import { News } from './collections/News'
 import { Faq } from './collections/Faq'
 import { Integrations } from './collections/Integrations'
+import { ContactSubmissions } from './collections/ContactSubmissions'
 import { Navigation, Footer, ContactModal } from './globals'
 
 const filename = fileURLToPath(import.meta.url)
@@ -22,7 +23,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, News, Faq, Integrations],
+  collections: [Users, Media, News, Faq, Integrations, ContactSubmissions],
   globals: [Navigation, Footer, ContactModal],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
