@@ -4,6 +4,7 @@ import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { getLayoutData } from '@/lib/api'
+import Link from 'next/link'
 
 type Props = {
   children: React.ReactNode
@@ -28,7 +29,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html lang={locale}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <header>
+          <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <nav>
               <ul>
                 {navigation.items?.map((item, i) => (
@@ -38,6 +39,9 @@ export default async function LocaleLayout({ children, params }: Props) {
                 ))}
               </ul>
             </nav>
+            <Link href="/admin" style={{ padding: '8px 16px', background: '#333', color: '#fff', borderRadius: '4px', textDecoration: 'none', fontSize: '14px' }}>
+              Admin Panel
+            </Link>
           </header>
           <main>{children}</main>
           <footer>
